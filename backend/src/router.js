@@ -12,7 +12,7 @@ const client = require("../database/client");
 router.get("/teams", (req, res) => {
   let url = "SELECT * FROM team";
   const values = [];
-  if (req.query.race) {
+  if (req.query.name) {
     url += " WHERE name = ?";
     values.push(req.query.name);
   }
@@ -30,13 +30,25 @@ router.get("/teams", (req, res) => {
     });
 });
 
-// Import itemControllers module for handling item-related operations
-// const itemControllers = require("./controllers/itemControllers");
-
-// Route to get a list of items
-// router.get("/items", itemControllers.browse);
-
 // Route to get a specific item by ID
+
+router.get("/teams/:id", (req, res) => {
+  const id = +req.params.id;
+
+  client
+    .query("select * from team where id = ?", [id])
+    .then(([team]) => {
+      if (team[0] != null) {
+        res.status(200).json(team[0]);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
 // router.get("/items/:id", itemControllers.read);
 
 // Route to add a new item

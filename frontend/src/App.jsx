@@ -1,40 +1,32 @@
-import Counter from "./components/Counter";
-import logo from "./assets/logo.svg";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3310/api/teams")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des données", error);
+      });
+  }, []);
+  console.info(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React !</p>
-
-        <Counter />
-
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="container">
+      {data.map((el) => (
+        <div key={el.id} className="cards">
+          <div className="cardsInfos">
+            <h2>{el.name}</h2>
+            <p>{el.country}</p>
+            <p>{el.league}</p>
+            <img src={el.logo} alt={el.name} />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
