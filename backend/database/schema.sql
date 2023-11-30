@@ -1,4 +1,6 @@
-create table item (
+create table team (
   id int unsigned primary key auto_increment not null,
-  title varchar(255) not null
+  name varchar(255) not null,
+  country varchar(100) not null,
+  league varchar(100) not null,
 );
