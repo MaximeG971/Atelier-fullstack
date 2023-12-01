@@ -1,0 +1,14 @@
+.completeCard {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.clubLogo img {
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+}

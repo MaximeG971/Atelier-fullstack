@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import React from "react";
 import "./Cards.css";
 
@@ -11,6 +12,9 @@ function Cards({ el }) {
           <p>{el.country}</p>
           <p>{el.league}</p>
           <img src={el.logo} alt={el.name} />
+          <Link to={`/teams/${el.id}`} key={el.id}>
+            <input type="button" value="Détails" />
+          </Link>
         </div>
       </div>
     </div>

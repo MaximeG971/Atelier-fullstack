@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Cards from "../components/cards/Cards";
 
@@ -18,9 +17,7 @@ function Home() {
   return (
     <div className="container">
       {clubsData.map((sport) => (
-        <Link to={`/teams/${sport.id}`} key={sport.id}>
-          <Cards key={sport.id} el={sport} />
-        </Link>
+        <Cards key={sport.id} el={sport} />
       ))}
     </div>
   );
