@@ -16,17 +16,20 @@ function App() {
   }, []);
   console.info(data);
   return (
-    <div className="container">
-      {data.map((el) => (
-        <div key={el.id} className="cards">
-          <div className="cardsInfos">
-            <h2>{el.name}</h2>
-            <p>{el.country}</p>
-            <p>{el.league}</p>
-            <img src={el.logo} alt={el.name} />
+    <div className="title">
+      <h1>Atelier Fullstack</h1>
+      <div className="container">
+        {data.map((el) => (
+          <div key={el.id} className="cards">
+            <div className="cardsInfos">
+              <h2>{el.name}</h2>
+              <p>{el.country}</p>
+              <p>{el.league}</p>
+              <img src={el.logo} alt={el.name} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
