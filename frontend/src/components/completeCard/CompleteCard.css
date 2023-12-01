@@ -1,3 +1,8 @@
+.boutonRetour input {
+  margin-top: 50px;
+  cursor: pointer;
+}
+
 .completeCard {
   display: flex;
   border: 1px solid black;
