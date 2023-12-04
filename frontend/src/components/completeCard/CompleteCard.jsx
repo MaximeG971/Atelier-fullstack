@@ -5,6 +5,7 @@ import "./CompleteCard.css";
 
 function CompleteCard() {
   const oneClubCard = useLoaderData();
+  console.info(oneClubCard);
   return (
     <div className="boutonRetour">
       <Link to="/">
@@ -20,6 +21,7 @@ function CompleteCard() {
         </div>
         <div>
           <h1>{oneClubCard.name}</h1>
+          <h2>{oneClubCard.sport}</h2>
           <h2>
             {oneClubCard.country}, {oneClubCard.league}
           </h2>
