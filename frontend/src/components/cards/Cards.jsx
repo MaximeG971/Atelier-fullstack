@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "./Cards.css";
 
-function Cards({ el }) {
+function Cards({ el, deleteTeam }) {
   return (
     <div className="container">
       <div key={el.id} className="cards">
@@ -15,6 +15,9 @@ function Cards({ el }) {
           <Link to={`/teams/${el.id}`} key={el.id}>
             <input type="button" value="Détails" />
           </Link>
+          <button type="button" onClick={() => deleteTeam(el.id)}>
+            Supprimer
+          </button>
         </div>
       </div>
     </div>
