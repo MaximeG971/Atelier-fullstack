@@ -12,8 +12,8 @@ class TeamManager extends AbstractManager {
   async create(team) {
     // Execute the SQL INSERT query to add a new team to the "team" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (title) values (?)`,
-      [team.title]
+      `insert into ${this.table} (name, country, league, logo) values (?, ?, ?, ?)`,
+      [team.name, team.country, team.league, team.logo]
     );
 
     // Return the ID of the newly inserted team
