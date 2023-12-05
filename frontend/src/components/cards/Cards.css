@@ -1,0 +1,44 @@
+body {
+  background: linear-gradient(to bottom, #005aa7, #fffde4);
+  background-attachment: fixed;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.cards {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-left: 25%;
+}
+
+.cardsInfos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cardsInfos h2 {
+  font-size: 2rem;
+}
+
+.cardsInfos p {
+  font-size: 1.5rem;
+}
+
+.cardsInfos input {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.cards img {
+  height: 100px;
+  width: 100px;
+}

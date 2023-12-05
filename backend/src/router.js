@@ -31,8 +31,7 @@ router.get("/teams", (req, res) => {
 });
 
 // Route to get a specific item by ID
-
-router.get("/teams/:id", (req, res) => {
+const teamGet = (req, res) => {
   const id = +req.params.id;
 
   client
@@ -48,7 +47,9 @@ router.get("/teams/:id", (req, res) => {
       console.error(error);
       res.sendStatus(500);
     });
-});
+};
+router.get("/teams/:id", teamGet);
+
 // router.get("/items/:id", itemControllers.read);
 
 // Route to add a new item
