@@ -10,10 +10,13 @@ const router = express.Router();
 // Route to get a list of teams
 
 const teamController = require("./controllers/teamControllers");
+const sportController = require("./controllers/sportControllers");
 
 router.get("/teams", teamController.browse);
 router.get("/teams/:id", teamController.read);
 router.post("/teams", teamController.add);
+router.get("/sports", sportController.browse);
+router.delete("/teams/:id", teamController.destroy);
 
 // Route to get a specific item by ID
 

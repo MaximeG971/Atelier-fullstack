@@ -1,8 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Post() {
+  const [sport, setSport] = useState([]);
+
   const [formValue, setFormValue] = useState({
     name: "",
     country: "",
@@ -30,6 +32,21 @@ function Post() {
       [name]: value,
     }));
   };
+
+  const selectFunc = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/sports/`
+      );
+      setSport(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.info(sport);
+  useEffect(() => {
+    selectFunc();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -63,13 +80,24 @@ function Post() {
       <h3>
         Logo (inserér un URL) :
         <input
-          type="text"
+          type="url"
           name="logo"
           value={formValue.logo}
           onChange={handleChange}
         />
-        <input type="submit" />
       </h3>
+      <h3>
+        Sport :
+        <select onChange={handleChange} name="sport_id">
+          <option value="">Choisissez votre sport</option>
+          {sport.map((el) => (
+            <option key={el.id} value={el.id}>
+              {el.name}
+            </option>
+          ))}
+        </select>
+      </h3>
+      <input type="submit" />
     </form>
   );
 }

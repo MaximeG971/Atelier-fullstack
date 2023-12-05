@@ -12,8 +12,8 @@ class TeamManager extends AbstractManager {
   async create(team) {
     // Execute the SQL INSERT query to add a new team to the "team" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, country, league, logo) values (?, ?, ?, ?)`,
-      [team.name, team.country, team.league, team.logo]
+      `insert into ${this.table} (name, country, league, logo, sport_id) values (?, ?, ?, ?, ?)`,
+      [team.name, team.country, team.league, team.logo, team.sport_id]
     );
 
     // Return the ID of the newly inserted team
@@ -49,11 +49,16 @@ class TeamManager extends AbstractManager {
   // }
 
   // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an team by its ID
+  async delete(id) {
+    // Execute the SQL SELECT query to retrieve a specific team by its ID
+    const [rows] = await this.database.query(
+      `delete from ${this.table} where id = ?`,
+      [id]
+    );
 
-  // async delete(id) {
-  //   ...
-  // }
+    // Return the first row of the result, which represents the team
+    return rows[0];
+  }
 }
 
 module.exports = TeamManager;
