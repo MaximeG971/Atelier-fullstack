@@ -2,10 +2,10 @@
 import React from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import "./CompleteCard.css";
+import Post from "../../pages/Post";
 
 function CompleteCard() {
   const oneClubCard = useLoaderData();
-  console.info(oneClubCard);
   return (
     <div className="boutonRetour">
       <Link to="/">
@@ -58,6 +58,7 @@ function CompleteCard() {
           </p>
         </div>
       </div>
+      <Post />
     </div>
   );
 }
