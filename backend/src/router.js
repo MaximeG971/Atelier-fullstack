@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const client = require("../database/client");
+// const client = require("../database/client");
 
 /* ************************************************************************* */
 // Define Your API Routes Here
@@ -9,46 +9,16 @@ const client = require("../database/client");
 
 // Route to get a list of teams
 
-router.get("/teams", (req, res) => {
-  let url = "SELECT * FROM team";
-  const values = [];
-  if (req.query.name) {
-    url += " WHERE name = ?";
-    values.push(req.query.name);
-  }
-  if (req.query.limit) {
-    url += " LIMIT ?";
-    values.push(+req.query.limit);
-  }
+const teamController = require("./controllers/teamControllers");
+const sportController = require("./controllers/sportControllers");
 
-  client
-    .query(url, values)
-    .then((result) => res.status(200).json(result[0]))
-    .catch((error) => {
-      console.error(error);
-      res.sendStatus(500);
-    });
-});
+router.get("/teams", teamController.browse);
+router.get("/teams/:id", teamController.read);
+router.post("/teams", teamController.add);
+router.get("/sports", sportController.browse);
+router.delete("/teams/:id", teamController.destroy);
 
 // Route to get a specific item by ID
-const teamGet = (req, res) => {
-  const id = +req.params.id;
-
-  client
-    .query("select * from team where id = ?", [id])
-    .then(([team]) => {
-      if (team[0] != null) {
-        res.status(200).json(team[0]);
-      } else {
-        res.sendStatus(404);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.sendStatus(500);
-    });
-};
-router.get("/teams/:id", teamGet);
 
 // router.get("/items/:id", itemControllers.read);
 
