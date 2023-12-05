@@ -13,6 +13,7 @@ const teamController = require("./controllers/teamControllers");
 
 router.get("/teams", teamController.browse);
 router.get("/teams/:id", teamController.read);
+router.post("/teams", teamController.add);
 
 // Route to get a specific item by ID
 
