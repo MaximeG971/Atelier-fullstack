@@ -1,28 +1,45 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-function Post() {
-  const [sport, setSport] = useState([]);
+function EditPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-
+  const [sport, setSport] = useState([]);
   const [formValue, setFormValue] = useState({
     name: "",
     country: "",
     league: "",
     logo: "",
+    sport_id: null,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/teams`, formValue)
-      .then((res) => {
-        console.info(res);
-        navigate("/");
-      })
-      .catch((err) => console.error(err));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/teams/${id}`
+        );
+        setFormValue(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  const showMe = async () => {
+    try {
+      const response = await axios.get("http://localhost:3310/api/sports");
+      setSport(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    showMe();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,20 +49,16 @@ function Post() {
     }));
   };
 
-  const selectFunc = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/sports/`
-      );
-      setSport(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/api/teams/${id}`, formValue)
+      .then((res) => {
+        console.info(res);
+        navigate("/");
+      })
+      .catch((err) => console.error(err));
   };
-  console.info(sport);
-  useEffect(() => {
-    selectFunc();
-  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -87,7 +100,11 @@ function Post() {
       </h3>
       <h3>
         Sport :
-        <select onChange={handleChange} name="sport_id">
+        <select
+          onChange={handleChange}
+          value={formValue.sport_id}
+          name="sport_id"
+        >
           <option value="">Choisissez votre sport</option>
           {sport.map((el) => (
             <option key={el.id} value={el.id}>
@@ -101,4 +118,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default EditPage;

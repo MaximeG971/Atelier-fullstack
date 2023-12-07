@@ -18,6 +18,9 @@ function Cards({ el, deleteTeam }) {
           <button type="button" onClick={() => deleteTeam(el.id)}>
             Supprimer
           </button>
+          <Link to={`/put/${el.id}`}>
+            <button type="button">Modifier</button>
+          </Link>
         </div>
       </div>
     </div>

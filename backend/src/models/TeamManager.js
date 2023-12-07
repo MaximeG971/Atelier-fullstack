@@ -44,9 +44,16 @@ class TeamManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing team
 
-  // async update(team) {
-  //   ...
-  // }
+  async update(id, team) {
+    // Execute the SQL SELECT query to retrieve a specific team by its ID
+    const [rows] = await this.database.query(
+      `UPDATE ${this.table} SET name = ?, country = ?, league = ?, logo = ?, sport_id = ? where id = ?`,
+      [team.name, team.country, team.league, team.logo, team.sport_id, id]
+    );
+
+    // Return the first row of the result, which represents the team
+    return rows.affectedRows;
+  }
 
   // The D of CRUD - Delete operation
   async delete(id) {

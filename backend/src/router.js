@@ -17,6 +17,7 @@ router.get("/teams/:id", teamController.read);
 router.post("/teams", teamController.add);
 router.get("/sports", sportController.browse);
 router.delete("/teams/:id", teamController.destroy);
+router.put("/teams/:id", teamController.edit);
 
 // Route to get a specific item by ID
 

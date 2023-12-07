@@ -7,6 +7,7 @@ import App from "./App";
 import Home from "./pages/Home";
 import CardComplete from "./pages/CardComplete";
 import Post from "./pages/Post";
+import EditPage from "./pages/EditPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/post",
         element: <Post />,
+      },
+      {
+        path: "/put/:id",
+        element: <EditPage />,
       },
     ],
   },
