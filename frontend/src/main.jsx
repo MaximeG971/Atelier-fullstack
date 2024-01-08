@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import CardComplete from "./pages/CardComplete";
 import Post from "./pages/Post";
 import EditPage from "./pages/EditPage";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/put/:id",
         element: <EditPage />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },

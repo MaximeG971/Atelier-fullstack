@@ -10,9 +10,6 @@ function NavBar() {
         <Link to="/post">
           <li>Post</li>
         </Link>
-        <Link to="/put">
-          <li>Put</li>
-        </Link>
       </ul>
     </nav>
   );

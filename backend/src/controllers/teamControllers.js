@@ -38,7 +38,7 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     await tables.team.update(req.params.id, req.body);
-    res.sendStatus(201);
+    res.sendStatus(203);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);

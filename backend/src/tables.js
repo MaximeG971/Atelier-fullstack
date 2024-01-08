@@ -7,11 +7,13 @@
 const ItemManager = require("./models/ItemManager");
 const TeamManager = require("./models/TeamManager");
 const SportManager = require("./models/SportManager");
+const SignupManager = require("./models/SignupManager");
 
 const managers = [
   ItemManager,
   TeamManager,
   SportManager,
+  SignupManager,
   // Add other managers here
 ];
 
